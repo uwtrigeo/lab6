@@ -6,17 +6,17 @@ style: 'mapbox://styles/mapbox/satellite-v9', // style URL
 center: [-103.2502, 29.2498], // starting position [lng, lat]
 zoom: 9, // starting zoom
 projection: 'globe',
-//pitch: 85,
+pitch: 65,
 //bearing: 80,
 });
 
-// trails layer
+// layers
 map.on('load', () => {
+    // trails layer
     map.addSource('trails', {
         type: 'geojson',
         data: 'data/Big_Bend_Trails.geojson'
     });
-    
     map.addLayer({
       'id': 'trails-layer',
       'type': 'line',
@@ -31,6 +31,7 @@ map.on('load', () => {
           ]
         }
     });
+    // boundary layer
     map.addSource('bounds', {
         type: 'geojson',
         data: 'data/BigBendBounds.geojson' 
@@ -47,7 +48,48 @@ map.on('load', () => {
       }
     });
 
+    // popup on trails not working with names from geojson yet
+    map.on('click', 'trails-layer', (e) => {
+        
+         
+        new mapboxgl.Popup()
+        .setLngLat(e.lngLat)
+        .setHTML("<p>Trail name: </p>")
+        .addTo(map);
+        });
+         
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter', 'trails-layer', () => {
+        map.getCanvas().style.cursor = 'pointer';
+        });
+         
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', 'trails-layer', () => {
+        map.getCanvas().style.cursor = '';
+        });
+
 });
+// rendering terrain in 3D
+map.on('load', function () {
+    map.addSource('mapbox-dem', {
+        "type": "raster-dem",
+        "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
+        'tileSize': 512,
+        'maxzoom': 14
+    });
+     map.setTerrain({"source": "mapbox-dem", "exaggeration": 1.3});
+     
+     map.setFog({
+        'range': [-1, 2],
+        'horizon-blend': 0.2,
+        'color': 'white',
+        'high-color': '#add8e6',
+        'space-color': '#d8f2ff',
+        'star-intensity': 0.0
+    });
+ });
 
-
-
+ const navControl = new mapboxgl.NavigationControl({
+    visualizePitch: true
+});
+map.addControl(navControl, 'top-right');

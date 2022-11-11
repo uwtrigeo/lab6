@@ -7,7 +7,7 @@ center: [-103.2502, 29.2498], // starting position [lng, lat]
 zoom: 9, // starting zoom
 projection: 'globe',
 pitch: 55,
-//bearing: 80,
+bearing: 80,
 });
 
 // layers
@@ -75,11 +75,11 @@ map.on('load', function () {
 });
 
 
-// popup on trails not working with names from geojson yet
-map.on('click', 'trails-layer', (e) => {
+// popup on trails - miles needs to be 2 decimal places
+map.on('click', 'trails-layer',(e) => {
     new mapboxgl.Popup()
     .setLngLat(e.lngLat)
-    .setHTML("<p>Trail Name: " +e.features[0].properties.TRLNAME+"<br>Trail Class: " + e.features[0].properties.TRLCLASS+ "<br>Trail Length: "+e.features[0].properties.Miles+ "</p>")
+    .setHTML("<p>Trail Name: " +e.features[0].properties.TRLNAME+"<br>Trail Class: " + e.features[0].properties.TRLCLASS+ "<br>Trail Length: "+(e.features[0].properties.Miles).toFixed(2)+ " miles</p>")
     .addTo(map);
     });
         

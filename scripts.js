@@ -6,7 +6,7 @@ style: 'mapbox://styles/mapbox/satellite-v9', // style URL
 center: [-103.2502, 29.2498], // starting position [lng, lat]
 zoom: 9, // starting zoom
 projection: 'globe',
-pitch: 65,
+pitch: 55,
 //bearing: 80,
 });
 
@@ -48,25 +48,6 @@ map.on('load', () => {
       }
     });
 
-    // popup on trails not working with names from geojson yet
-    map.on('click', 'trails-layer', (e) => {
-        
-         
-        new mapboxgl.Popup()
-        .setLngLat(e.lngLat)
-        .setHTML("<p>Trail name: </p>")
-        .addTo(map);
-        });
-         
-        // Change the cursor to a pointer when the mouse is over the places layer.
-        map.on('mouseenter', 'trails-layer', () => {
-        map.getCanvas().style.cursor = 'pointer';
-        });
-         
-        // Change it back to a pointer when it leaves.
-        map.on('mouseleave', 'trails-layer', () => {
-        map.getCanvas().style.cursor = '';
-        });
 
 });
 // rendering terrain in 3D
@@ -92,4 +73,24 @@ map.on('load', function () {
  const navControl = new mapboxgl.NavigationControl({
     visualizePitch: true
 });
+
+
+// popup on trails not working with names from geojson yet
+map.on('click', 'trails-layer', (e) => {
+    new mapboxgl.Popup()
+    .setLngLat(e.lngLat)
+    .setHTML("<p>Trail Name: " +e.features[0].properties.TRLNAME+"<br>Trail Class: " + e.features[0].properties.TRLCLASS+ "<br>Trail Length: "+e.features[0].properties.Miles+ "</p>")
+    .addTo(map);
+    });
+        
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    map.on('mouseenter', 'trails-layer', () => {
+    map.getCanvas().style.cursor = 'pointer';
+    });
+        
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'trails-layer', () => {
+    map.getCanvas().style.cursor = '';
+    });
+
 map.addControl(navControl, 'top-right');

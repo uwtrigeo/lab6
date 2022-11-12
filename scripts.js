@@ -77,6 +77,7 @@ map.on('load', function () {
         'star-intensity': 0.0
     });
  });
+
 // Navigation controls
  const navControl = new mapboxgl.NavigationControl({
     visualizePitch: true

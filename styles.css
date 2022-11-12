@@ -9,7 +9,7 @@ h1{
  }
 
 p{
-  text-align: center;
+  /* text-align: center; */
     font-family: 'Montserrat', sans-serif;
 } 
 
@@ -19,7 +19,7 @@ p{
     box-shadow: 6px 4px 8px 4px;
     font: 12px/20px 'Montserrat', sans-serif;
     z-index: 1;
-    width: 250px;
+    width: 275px;
     height: 75px;
 }
 

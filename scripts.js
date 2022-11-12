@@ -7,7 +7,7 @@ center: [-103.2502, 29.2498], // starting position [lng, lat]
 zoom: 9, // starting zoom
 projection: 'globe',
 pitch: 55,
-bearing: 80,
+bearing: 45,
 });
 
 // layers
@@ -21,6 +21,10 @@ map.on('load', () => {
       'id': 'trails-layer',
       'type': 'line',
       'source': 'trails',
+      'layout': {
+        // Make the layer visible by default.
+        'visibility': 'visible'
+      },
       'paint': {
           'line-width': 5,
           'line-color': ['match', ['get', 'TRLCLASS'],
@@ -41,6 +45,10 @@ map.on('load', () => {
       'id': 'boundary-layer',
       'type': 'line',
       'source': 'bounds',
+      'layout': {
+        // Make the layer visible by default.
+        'visibility': 'visible'
+      },
       'paint': {
           'line-width': 4,
           'line-color': 'black',
@@ -69,11 +77,14 @@ map.on('load', function () {
         'star-intensity': 0.0
     });
  });
-
+// Navigation controls
  const navControl = new mapboxgl.NavigationControl({
     visualizePitch: true
+
 });
 
+// Add navigation control
+map.addControl(navControl, 'top-right');
 
 // popup on trails - miles needs to be 2 decimal places
 map.on('click', 'trails-layer',(e) => {
@@ -93,4 +104,5 @@ map.on('click', 'trails-layer',(e) => {
     map.getCanvas().style.cursor = '';
     });
 
-map.addControl(navControl, 'top-right');
+
+

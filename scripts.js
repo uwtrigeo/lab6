@@ -105,5 +105,10 @@ map.on('click', 'trails-layer',(e) => {
     map.getCanvas().style.cursor = '';
     });
 
-
+// Scale
+const scale = new mapboxgl.ScaleControl({
+    maxWidth: 80,
+    unit: 'imperial'
+    });
+    map.addControl(scale);
 

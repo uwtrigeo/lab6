@@ -56,7 +56,6 @@ map.on('load', () => {
       }
     });
 
-
 });
 // rendering terrain in 3D
 map.on('load', function () {
@@ -111,4 +110,6 @@ const scale = new mapboxgl.ScaleControl({
     unit: 'imperial'
     });
     map.addControl(scale);
+
+
 

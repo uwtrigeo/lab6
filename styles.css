@@ -80,7 +80,7 @@ p{
       top: 135px;
       right: 50px;
       border-radius: 3px;
-      width: 120px;
+      width: 125px;
       border: 1px solid rgba(0, 0, 0, 0.4);
       font-family: 'Open Sans', sans-serif;
       }
@@ -107,8 +107,9 @@ p{
       }
        
       #menu a.active {
-      background-color: #3887be;
-      color: #ffffff;
+      background-color: #ffffff;
+      color: #141313;
+      font-family: 'Montserrat', sans-serif;
       }
        
       #menu a.active:hover {

@@ -1,13 +1,13 @@
 // Mapbox map
 mapboxgl.accessToken = 'pk.eyJ1IjoidHJpZ2VvIiwiYSI6ImNsOXlmZXlheTA0a3kzdmxuemE5MHVsMnQifQ.abEIHxGUIn-Yz1IwcRTT7Q';
 const map = new mapboxgl.Map({
-container: 'map', // container ID
-style: 'mapbox://styles/mapbox/satellite-v9', // style URL
-center: [-103.2502, 29.2498], // starting position [lng, lat]
-zoom: 9, // starting zoom
-projection: 'globe',
-pitch: 55,
-bearing: 45,
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/satellite-v9', // style URL
+    center: [-103.2502, 29.2498], // starting position [lng, lat]
+    zoom: 9, // starting zoom
+    projection: 'globe',
+    pitch: 55,
+    bearing: 45,
 });
 
 // layers
@@ -57,6 +57,7 @@ map.on('load', () => {
     });
 
 });
+
 // Toggle layers
 // After the last frame rendered before the map enters an "idle" state.
 map.on('idle', () => {
@@ -131,15 +132,12 @@ map.on('load', function () {
         'space-color': '#d8f2ff',
         'star-intensity': 0.0
     });
- });
-
-// Navigation controls
- const navControl = new mapboxgl.NavigationControl({
-    visualizePitch: true
-
 });
 
-// Add navigation control
+// Navigation controls
+const navControl = new mapboxgl.NavigationControl({
+    visualizePitch: true
+});
 map.addControl(navControl, 'top-right');
 
 // popup on trails
@@ -148,24 +146,25 @@ map.on('click', 'trails-layer',(e) => {
     .setLngLat(e.lngLat)
     .setHTML("<p>Trail Name: " +e.features[0].properties.TRLNAME+"<br>Trail Class: " + e.features[0].properties.TRLCLASS+ "<br>Trail Length: "+(e.features[0].properties.Miles).toFixed(2)+ " miles</p>")
     .addTo(map);
-    });
+});
         
-    // Change the cursor to a pointer when the mouse is over the places layer.
-    map.on('mouseenter', 'trails-layer', () => {
+// Change the cursor to a pointer when the mouse is over the places layer.
+map.on('mouseenter', 'trails-layer', () => {
     map.getCanvas().style.cursor = 'pointer';
-    });
+});
         
-    // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'trails-layer', () => {
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'trails-layer', () => {
     map.getCanvas().style.cursor = '';
-    });
+});
 
 // Scale
 const scale = new mapboxgl.ScaleControl({
     maxWidth: 80,
     unit: 'imperial'
-    });
+});
     map.addControl(scale);
 
+// Attribution
 
-
+   

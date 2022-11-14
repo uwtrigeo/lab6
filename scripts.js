@@ -142,7 +142,7 @@ map.on('load', function () {
 // Add navigation control
 map.addControl(navControl, 'top-right');
 
-// popup on trails - miles needs to be 2 decimal places
+// popup on trails
 map.on('click', 'trails-layer',(e) => {
     new mapboxgl.Popup()
     .setLngLat(e.lngLat)
